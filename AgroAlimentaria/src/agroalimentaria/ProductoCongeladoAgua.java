@@ -40,6 +40,11 @@ public class ProductoCongeladoAgua extends ProductoCongelado{
     public void setLitrosDeAgua(float litrosDeAgua) {
         this.litrosDeAgua = litrosDeAgua;
     }
+
+    @Override
+    public String toString() {
+        return super.toString()+",\nGramos de Sal=" + gramosDeSal + ",\nLitros de Agua=" + litrosDeAgua;
+    }
     
     
     

@@ -43,6 +43,11 @@ public class ProductoCongeladoNitrogeno extends ProductoCongelado{
     public void setTiempoDeExposicion(float TiempoDeExposicion) {
         this.TiempoDeExposicion = TiempoDeExposicion;
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + ",\nMetodo de Congelacion Empleado=" + CongelacionEmpleado + ",\nTiempo De Exposicion=" + TiempoDeExposicion;
+    }
     
     
     

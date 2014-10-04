@@ -61,6 +61,11 @@ public class ProductoCongeladoAire extends ProductoCongelado {
     public void setPorcentajeVaporDeAgua(float porcentajeVaporDeAgua) {
         this.porcentajeVaporDeAgua = porcentajeVaporDeAgua;
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + ",\nPorcentaje de Nitrogeno=" + porcentajeNitrogeno + "\nPorcentaje de Oxigeno=" + porcentajeOxigeno + "\nPorcentaje de Dioxido de Carbono=" + porcentajeDioxidoDeCarbono + "\nPorcentaje deVapor De Agua=" + porcentajeVaporDeAgua;
+    }
     
     
     
