@@ -17,6 +17,16 @@ public class ProductoCongelado extends Producto {
     protected String paisOrigen;
     protected Float temperaturaRecomendada;
 
+    public ProductoCongelado() {
+    }
+
+    public ProductoCongelado(Date fechaEnvasado, String paisOrigen, Float temperaturaRecomendada, Date fechaCaducidad, Integer numeroLote) {
+        super(fechaCaducidad, numeroLote);
+        this.fechaEnvasado = fechaEnvasado;
+        this.paisOrigen = paisOrigen;
+        this.temperaturaRecomendada = temperaturaRecomendada;
+    }
+
     public Date getFechaEnvasado() {
         return fechaEnvasado;
     }
