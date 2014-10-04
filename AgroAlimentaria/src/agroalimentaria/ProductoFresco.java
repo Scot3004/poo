@@ -10,7 +10,7 @@ import java.util.Date;
 
 /**
  *
- * @author sala101
+ * @author bohorquezhector@coruniamericana.edu.co, orozcosergio@coruniamericana.edu.co
  */
 public class ProductoFresco extends Producto {
     protected Date fechaEnvasado;
@@ -19,11 +19,8 @@ public class ProductoFresco extends Producto {
     public ProductoFresco() {
     }
 
-    public ProductoFresco(Date fechaCaducidad, Integer numeroLote) {
+    public ProductoFresco(Date fechaEnvasado, String paisOrigen, Date fechaCaducidad, Integer numeroLote) {
         super(fechaCaducidad, numeroLote);
-    }
-
-    public ProductoFresco(Date fechaEnvasado, String paisOrigen) {
         this.fechaEnvasado = fechaEnvasado;
         this.paisOrigen = paisOrigen;
     }

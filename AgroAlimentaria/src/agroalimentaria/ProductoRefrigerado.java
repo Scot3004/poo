@@ -10,7 +10,7 @@ import java.util.Date;
 
 /**
  *
- * @author sala101
+ * @author bohorquezhector@coruniamericana.edu.co, orozcosergio@coruniamericana.edu.co
  */
 public class ProductoRefrigerado extends Producto{
     protected String codigoOrganismoSupervision;
@@ -18,6 +18,21 @@ public class ProductoRefrigerado extends Producto{
     protected String paisOrigen;
     protected Float temperaturaRecomendada;
 
+    public ProductoRefrigerado() {
+    }
+
+    public ProductoRefrigerado(Date fechaCaducidad, Integer numeroLote) {
+        super(fechaCaducidad, numeroLote);
+    }
+    
+    public ProductoRefrigerado(String codigoOrganismoSupervision, Date fechaEnvasado, String paisOrigen, Float temperaturaRecomendada, Date fechaCaducidad, Integer numeroLote) {
+        super(fechaCaducidad, numeroLote);
+        this.codigoOrganismoSupervision = codigoOrganismoSupervision;
+        this.fechaEnvasado = fechaEnvasado;
+        this.paisOrigen = paisOrigen;
+        this.temperaturaRecomendada = temperaturaRecomendada;
+    }
+    
     public String getCodigoOrganismoSupervision() {
         return codigoOrganismoSupervision;
     }

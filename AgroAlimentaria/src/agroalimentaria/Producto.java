@@ -10,7 +10,7 @@ import java.util.Date;
 
 /**
  *
- * @author sala101
+ * @author bohorquezhector@coruniamericana.edu.co, orozcosergio@coruniamericana.edu.co
  */
 public class Producto {
     protected Date fechaCaducidad;
