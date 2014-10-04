@@ -12,9 +12,10 @@ import java.util.Date;
  *
  * @author bohorquezhector@coruniamericana.edu.co, orozcosergio@coruniamericana.edu.co
  */
-public class Producto {
-    protected Date fechaCaducidad;
+public abstract class Producto {
     protected Integer numeroLote;
+    protected Date fechaCaducidad;
+    
 
     public Producto() {
     }
@@ -39,4 +40,12 @@ public class Producto {
     public void setNumeroLote(Integer numeroLote) {
         this.numeroLote = numeroLote;
     }
+
+    @Override
+    public String toString() {
+         return "numeroLote=" + numeroLote + 
+         "\nfechaCaducidad=" + fechaCaducidad ;
+    }
+    
+    
 }
