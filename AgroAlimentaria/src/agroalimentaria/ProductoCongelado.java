@@ -50,4 +50,11 @@ public class ProductoCongelado extends Producto {
     public void setTemperaturaRecomendada(Float temperaturaRecomendada) {
         this.temperaturaRecomendada = temperaturaRecomendada;
     }
+
+    @Override
+    public String toString() {
+        return super.toString()+",\nFecha de Envasado=" + fechaEnvasado + ",\nPais de Origen=" + paisOrigen + ",\nTemperatura Recomendada=" + temperaturaRecomendada;
+    }
+    
+    
 }

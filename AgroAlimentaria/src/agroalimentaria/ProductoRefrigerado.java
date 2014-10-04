@@ -64,4 +64,11 @@ public class ProductoRefrigerado extends Producto{
     public void setTemperaturaRecomendada(Float temperaturaRecomendada) {
         this.temperaturaRecomendada = temperaturaRecomendada;
     }
+
+    @Override
+    public String toString() {
+        return super.toString()+",\nCódigo de Organismo Supervision=" + codigoOrganismoSupervision + ",\nFecha de Envasado=" + fechaEnvasado + ",\nPais de Origen=" + paisOrigen + ",\nTemperatura Recomendada=" + temperaturaRecomendada;
+    }
+    
+    
 }
