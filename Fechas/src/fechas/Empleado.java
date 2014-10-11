@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package fechas;
 
 import java.math.BigDecimal;
@@ -12,7 +11,8 @@ import java.math.BigDecimal;
  *
  * @author bohorquezhector@coruniamericana.edu.co
  */
-public class Empleado extends Persona{
+public class Empleado extends Persona {
+
     private BigDecimal Salario;
 
     public BigDecimal getSalario() {
@@ -22,5 +22,5 @@ public class Empleado extends Persona{
     public void setSalario(BigDecimal Salario) {
         this.Salario = Salario;
     }
-    
+
 }

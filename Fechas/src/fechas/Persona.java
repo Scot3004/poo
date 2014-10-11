@@ -13,6 +13,7 @@ import java.util.GregorianCalendar;
  * @author scot3004
  */
 public class Persona {
+
     protected String nombre;
     protected Date nacimiento;
     protected String direccion;
@@ -61,18 +62,19 @@ public class Persona {
 
     /**
      * Conpara con otra persona y dice si es mayor o no
+     *
      * @param otro
-     * @return 
+     * @return
      */
-    public boolean esMayor(Persona otro){
+    public boolean esMayor(Persona otro) {
         return this.getNacimiento().before(otro.getNacimiento());
     }
-    
-    public boolean isAdulto(){ 
-        GregorianCalendar ahora=new GregorianCalendar();
-        GregorianCalendar gc=new GregorianCalendar(
-                ahora.get(GregorianCalendar.YEAR)-18, 
-                ahora.get(GregorianCalendar.MONTH), 
+
+    public boolean isAdulto() {
+        GregorianCalendar ahora = new GregorianCalendar();
+        GregorianCalendar gc = new GregorianCalendar(
+                ahora.get(GregorianCalendar.YEAR) - 18,
+                ahora.get(GregorianCalendar.MONTH),
                 ahora.get(GregorianCalendar.DAY_OF_MONTH));
         return this.getNacimiento().before(gc.getTime());
     }
