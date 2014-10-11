@@ -212,5 +212,6 @@ public class Fechas {
     }
         public void consultarInformacion(){
             agregarPersona();
+
         }
 }
