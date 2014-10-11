@@ -9,7 +9,7 @@ package fechas;
  *
  * @author scot3004
  */
-public class Estudiante {
+public class Estudiante extends Persona{
     private String materia;
 
     public String getMateria() {

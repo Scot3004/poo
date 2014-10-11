@@ -29,19 +29,18 @@ public class Fechas {
 
         int opc;
         do {
-            System.out.println("\n");
-            System.out.println("\n	  MENU PRINCIPAL");
-            System.out.println("\n1.Agregar Persona");
-            System.out.println("\n2.Modificar Informacion");
-            System.out.println("\n3.Persona de Mayor Edad");
-            System.out.println("\n4.Numero de Personas Mayores de Edad");
-            System.out.println("\n5.Estudiantes de Menor Edad ");
-            System.out.println("\n6.Programa mas Escojido");
-            System.out.println("\n7.Salario mas Alto");
-            System.out.println("\n8.Personas que viven en Barranquilla");
-            System.out.println("\n0.Salir");
-            System.out.println("\n");
-            System.out.println("\ningrese su opcion\t");
+            System.out.println();
+            System.out.println("	  MENU PRINCIPAL");
+            System.out.println("1.Agregar Persona");
+            System.out.println("2.Modificar Informacion");
+            System.out.println("3.Persona de Mayor Edad");
+            System.out.println("4.Consultar Informacion");
+            System.out.println("5.Estudiantes de Menor Edad ");
+            System.out.println("6.Programa mas Escojido");
+            System.out.println("7.Salario mas Alto");
+            System.out.println("8.Personas que viven en Barranquilla");
+            System.out.println("0.Salir");
+            System.out.println("ingrese su opcion\t");
             opc = in.nextInt();
             switch (opc) {
                 case 1:
@@ -54,7 +53,7 @@ public class Fechas {
                     System.out.println("La persona de mayor edad es: "+gestion.elMayor());
                     break;
                 case 4:
-
+                    gestion.consultarInformacion();
                     break;
                 case 5:
 
@@ -114,7 +113,14 @@ public class Fechas {
      * datos de las personas
      */
     public void agregarPersona() {
-        Persona p = new Persona();
+        Persona p;// = new Persona();
+        //Condicion crear persona o enoleado
+        System.out.println("Digite una Opcion");
+        int opcion =  sc.nextInt();
+        if(opcion==1)
+            p=new Empleado();
+        else
+            p=new Estudiante();
         p.setNombre(obtenerCampo("Nombre:"));
         p.setCiudad(obtenerCampo("Ciduad:"));
         p.setCodigoPostal(obtenerCampo("Codigo Postal:"));
@@ -148,15 +154,14 @@ public class Fechas {
         //TODO: agregar condicional
         int opc;
         do {
-            System.out.println("\n");
-            System.out.println("\nEDICION DE PERSONA");
-            System.out.println("\n1.Editar Nombre");
-            System.out.println("\n2.Editar Ciudad");
-            System.out.println("\n3.Editar Codigo Postal");
-            System.out.println("\n4.Editar Direccion");
-            System.out.println("\n0.Salir");
-            System.out.println("\n");
-            System.out.println("\ningrese su opcion\t");
+            System.out.println();
+            System.out.println("EDICION DE PERSONA");
+            System.out.println("1.Editar Nombre");
+            System.out.println("2.Editar Ciudad");
+            System.out.println("3.Editar Codigo Postal");
+            System.out.println("4.Editar Direccion");
+            System.out.println("0.Salir");
+            System.out.println("ingrese su opcion\t");
             opc = sc.nextInt();
             switch (opc) {
                 case 1:
@@ -177,6 +182,7 @@ public class Fechas {
             }// fin de switch
         }while (opc != 0); //fin de while
     }
+    
     public Date obtenerFecha(String nombreCampo){
         int dia, mes, anio;
         System.out.println("\nIngresando "+nombreCampo);
@@ -202,5 +208,9 @@ public class Fechas {
         System.out.println("Ingrese año de "+nombreCampo);
         anio=sc.nextInt();
         return new GregorianCalendar(anio, mes, dia).getTime();
+        
     }
+        public void consultarInformacion(){
+            agregarPersona();
+        }
 }
