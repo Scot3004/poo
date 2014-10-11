@@ -6,6 +6,7 @@
 package fechas;
 
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  *
@@ -60,5 +61,14 @@ public class Persona {
 
     public boolean esMayor(Persona otro){
         return this.getNacimiento().before(otro.getNacimiento());
+    }
+    
+    public boolean isAdulto(){ 
+        GregorianCalendar ahora=new GregorianCalendar();
+        GregorianCalendar gc=new GregorianCalendar(
+                ahora.get(GregorianCalendar.YEAR)-18, 
+                ahora.get(GregorianCalendar.MONTH), 
+                ahora.get(GregorianCalendar.DAY_OF_MONTH));
+        return this.getNacimiento().before(gc.getTime());
     }
 }

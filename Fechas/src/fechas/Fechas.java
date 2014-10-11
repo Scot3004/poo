@@ -30,5 +30,13 @@ public class Fechas {
                 mayor=p;
         }
         return mayor;
-    }    
+    }
+    
+    public boolean algunoEnBarranquilla(){
+        for(Persona p:personas){
+            if(p.getCiudad().equals("Barranquilla"))
+                return true;
+        }
+        return false;
+    }
 }
