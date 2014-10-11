@@ -58,5 +58,7 @@ public class Persona {
         this.ciudad = ciudad;
     }
 
-    
+    public boolean esMayor(Persona otro){
+        return this.getNacimiento().before(otro.getNacimiento());
+    }
 }
