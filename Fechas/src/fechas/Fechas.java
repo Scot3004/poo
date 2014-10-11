@@ -6,10 +6,12 @@
 package fechas;
 
 import static java.lang.System.out;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.Map.Entry;
 import java.util.Scanner;
 
 /**
@@ -76,7 +78,7 @@ public class Fechas {
                     }
                     break;
                 case 7:
-
+                    System.out.println("El programa mas escogido es: "+gestion.masEscogido());
                     break;
                 case 8:
 
@@ -146,20 +148,28 @@ public class Fechas {
         return mayores;
     }
     
-    public int masEscogida() {
+    public String masEscogido() {
         HashMap<String, Integer> elegidas = new HashMap<>();
-        int mayores=0;
         for (Persona p : personas) {
             if (p instanceof Estudiante) {
-                Integer numero=elegidas.get(((Estudiante)p).getMateria());
+                Integer numero=elegidas.get(((Estudiante)p).getPrograma());
                 if(numero==null){
                     numero=0;
                 }
                 numero++;
-                elegidas.put(((Estudiante)p).getMateria(), numero);
+                elegidas.put(((Estudiante)p).getPrograma(), numero);
             }
         }
-        return mayores;
+        String materiaMayor = null;
+        int numero=0;
+        for(Entry<String, Integer> materia:elegidas.entrySet()){
+            if(materia.getValue()>numero){
+                materiaMayor=materia.getKey();
+                numero=materia.getValue();
+            }
+                
+        }
+        return materiaMayor;
     }
 
     /**
@@ -168,17 +178,25 @@ public class Fechas {
     public void agregarPersona() {
         Persona p;// = new Persona();
         //Condicion crear persona o enoleado
-        System.out.println("Digite una Opcion");
+        System.out.println("Digite una Opcion 1: Empleado, 2 Estudiante");
         int opcion =  sc.nextInt();
         if(opcion==1)
             p=new Empleado();
-        else
+        else if(opcion==2)
             p=new Estudiante();
+        else{
+            System.out.println("Opcion no valida retornando al menu");
+            return;
+        }
         p.setNombre(obtenerCampo("Nombre:"));
         p.setCiudad(obtenerCampo("Ciduad:"));
         p.setCodigoPostal(obtenerCampo("Codigo Postal:"));
         p.setDireccion(obtenerCampo("Direccion:"));
         p.setNacimiento(obtenerFecha("nacimiento"));
+        if(opcion==1)
+            ((Empleado)p).setSalario(new BigDecimal(obtenerCampo("Salario: ")));
+        else
+            ((Estudiante)p).setPrograma(obtenerCampo("Programa:"));
         //TODO: nacimiento de persona        
         personas.add(p);
         System.out.println("La persona tiene id: "+(personas.size()-1));
@@ -196,11 +214,6 @@ public class Fechas {
     }
   
     public void editarInformacion(){
-        //TODO; Pedir que persona modificara
-        //TODO; Pedir que campo Se editara
-        //TODO: Editar el campo
-        //TODO: Ciclo para saber si va a cambiar mas campos
-        
         System.out.println("Que persona modificara  (id)");
         int index=sc.nextInt();
         Persona p=personas.get(index);

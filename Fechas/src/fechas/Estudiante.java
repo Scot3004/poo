@@ -10,15 +10,18 @@ package fechas;
  * @author scot3004
  */
 public class Estudiante extends Persona{
-    private String materia;
+    private String programa;
 
-    public String getMateria() {
-        return materia;
+    public String getPrograma() {
+        return programa;
     }
 
-    public void setMateria(String materia) {
-        this.materia = materia;
+    public void setPrograma(String programa) {
+        this.programa = programa;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return super.toString()+"\nprograma=" + programa;
+    }    
 }

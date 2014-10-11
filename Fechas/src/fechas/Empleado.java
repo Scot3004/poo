@@ -13,14 +13,18 @@ import java.math.BigDecimal;
  */
 public class Empleado extends Persona {
 
-    private BigDecimal Salario;
+    private BigDecimal salario;
 
     public BigDecimal getSalario() {
-        return Salario;
+        return salario;
     }
 
     public void setSalario(BigDecimal Salario) {
-        this.Salario = Salario;
+        this.salario = Salario;
     }
 
+    @Override
+    public String toString() {
+        return super.toString()+"\nsalario=" + salario;
+    }    
 }
