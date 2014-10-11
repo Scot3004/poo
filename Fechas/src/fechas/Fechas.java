@@ -34,8 +34,8 @@ public class Fechas {
             System.out.println("\n1.Agregar Persona");
             System.out.println("\n2.Modificar Informacion");
             System.out.println("\n3.Persona de Mayor Edad");
-            System.out.println("\n4.Numero de Personas Mayores de Edad");
-            System.out.println("\n5.Estudiantes de Menor Edad ");
+            System.out.println("\n4.Numero de Personas Menores de Edad");
+            System.out.println("\n5.Numero de Personas Mayores de Edad ");
             System.out.println("\n6.Programa mas Escojido");
             System.out.println("\n7.Salario mas Alto");
             System.out.println("\n8.Personas que viven en Barranquilla");
@@ -43,6 +43,7 @@ public class Fechas {
             System.out.println("\n");
             System.out.println("\ningrese su opcion\t");
             opc = in.nextInt();
+            System.out.println();
             switch (opc) {
                 case 1:
                     gestion.agregarPersona();
@@ -54,10 +55,21 @@ public class Fechas {
                     System.out.println("La persona de mayor edad es: "+gestion.elMayor());
                     break;
                 case 4:
-
+                    int menores=gestion.menoresDeEdad();
+                    if(menores==0){
+                        System.out.println("No hay personas menores de edad");
+                    }else{
+                       System.out.println("Los menores de edad son: "+menores);
+                    }
+                    
                     break;
                 case 5:
-
+                    int mayores=gestion.mayoresDeEdad();
+                    if(mayores==0){
+                        System.out.println("No hay personas menores de edad");
+                    }else{
+                       System.out.println("Los menores de edad son: "+mayores);
+                    }
                     break;
                 case 6:
 
@@ -108,6 +120,26 @@ public class Fechas {
             }
         }
         return residentes;
+    }
+    
+    public int menoresDeEdad() {
+        int menores=0;
+        for (Persona p : personas) {
+            if (!p.isAdulto()) {
+                menores++;
+            }
+        }
+        return menores;
+    }
+    
+    public int mayoresDeEdad() {
+        int mayores=0;
+        for (Persona p : personas) {
+            if (p.isAdulto()) {
+                mayores++;
+            }
+        }
+        return mayores;
     }
 
     /**
