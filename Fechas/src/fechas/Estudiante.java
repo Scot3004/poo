@@ -10,5 +10,15 @@ package fechas;
  * @author scot3004
  */
 public class Estudiante {
-    String materia;
+    private String materia;
+
+    public String getMateria() {
+        return materia;
+    }
+
+    public void setMateria(String materia) {
+        this.materia = materia;
+    }
+    
+    
 }
