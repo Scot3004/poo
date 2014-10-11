@@ -6,6 +6,7 @@
 package fechas;
 
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.Scanner;
 
 
@@ -15,12 +16,13 @@ import java.util.Scanner;
  */
 public class Fechas {
     ArrayList<Persona> personas=new ArrayList<>();
+    Scanner sc=new Scanner(System.in);
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
+       Fechas gestion=new Fechas();
     		Scanner in=new Scanner(System.in);
     		
     	int opc=0; 
@@ -42,8 +44,7 @@ public class Fechas {
     		
     	switch (opc){
     	case 1:
-    
-    
+                gestion.agregarPersona();    
     	break;
     	case 2:
    
@@ -104,5 +105,28 @@ public class Fechas {
                 return true;
         }
         return false;
+    }
+    
+    /**
+     * datos de las personas
+     */
+    public void agregarPersona(){
+        Persona p=new Persona();
+        p.setNombre(obtenerCampo("Nombre:"));
+        p.setCiudad(obtenerCampo("Ciduad:"));
+        p.setCodigoPostal(obtenerCampo("Codigo Postal:"));
+        p.setDireccion(obtenerCampo("Direccion:"));       
+        //TODO: nacimiento de persona        
+        personas.add(p);        
+    }
+    
+    /**
+     * Obtiene un dato obtenido por consola
+     * @param mensaje
+     * @return 
+     */
+    public String obtenerCampo(String mensaje){
+        System.out.println("\n"+mensaje);
+        return sc.next();
     }
 }
