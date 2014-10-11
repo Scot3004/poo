@@ -58,6 +58,11 @@ public class Persona {
         this.ciudad = ciudad;
     }
 
+    /**
+     * Conpara con otra persona y dice si es mayor o no
+     * @param otro
+     * @return 
+     */
     public boolean esMayor(Persona otro){
         return this.getNacimiento().before(otro.getNacimiento());
     }
