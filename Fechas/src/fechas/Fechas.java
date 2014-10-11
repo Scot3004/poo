@@ -7,6 +7,7 @@ package fechas;
 
 import static java.lang.System.out;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
 
@@ -33,7 +34,7 @@ public class Fechas {
             System.out.println("\n1.Agregar Persona");
             System.out.println("\n2.Modificar Informacion");
             System.out.println("\n3.Persona de Mayor Edad");
-            System.out.println("\n4.Numero de Personas de Mayor Edad");
+            System.out.println("\n4.Numero de Personas Mayores de Edad");
             System.out.println("\n5.Estudiantes de Menor Edad ");
             System.out.println("\n6.Programa mas Escojido");
             System.out.println("\n7.Salario mas Alto");
@@ -50,7 +51,7 @@ public class Fechas {
                     gestion.editarInformacion();
                     break;
                 case 3:
-
+                    System.out.println("La persona de mayor edad es: "+gestion.elMayor());
                     break;
                 case 4:
 
@@ -65,7 +66,12 @@ public class Fechas {
 
                     break;
                 case 8:
-
+                    int personasEnBarranquilla=gestion.personasEnBarranquilla();
+                    if(personasEnBarranquilla==0){
+                        System.out.println("No hay personas en Barranquilla");
+                    }else{
+                       System.out.println("Los residentes en Barranquilla son: "+personasEnBarranquilla);
+                    }
                     break;
                 case 0:
                     System.exit(0);
@@ -78,6 +84,10 @@ public class Fechas {
         }while (opc != 0); //fin de while
     }
 
+    /**
+     * Obtiene la persona que es mayor entre todos
+     * @return 
+     */
     public Persona elMayor() {
         Persona mayor = null;
         for (Persona p : personas) {
@@ -90,13 +100,14 @@ public class Fechas {
         return mayor;
     }
 
-    public boolean algunoEnBarranquilla() {
+    public int personasEnBarranquilla() {
+        int residentes=0;
         for (Persona p : personas) {
             if (p.getCiudad().equals("Barranquilla")) {
-                return true;
+                residentes++;
             }
         }
-        return false;
+        return residentes;
     }
 
     /**
@@ -108,6 +119,7 @@ public class Fechas {
         p.setCiudad(obtenerCampo("Ciduad:"));
         p.setCodigoPostal(obtenerCampo("Codigo Postal:"));
         p.setDireccion(obtenerCampo("Direccion:"));
+        p.setNacimiento(obtenerFecha("nacimiento"));
         //TODO: nacimiento de persona        
         personas.add(p);
         System.out.println("La persona tiene id: "+(personas.size()-1));
@@ -123,7 +135,6 @@ public class Fechas {
         System.out.println("\n" + mensaje);
         return sc.next();
     }
-    
   
     public void editarInformacion(){
         //TODO; Pedir que persona modificara
@@ -165,5 +176,31 @@ public class Fechas {
                     break;
             }// fin de switch
         }while (opc != 0); //fin de while
+    }
+    public Date obtenerFecha(String nombreCampo){
+        int dia, mes, anio;
+        System.out.println("\nIngresando "+nombreCampo);
+        System.out.println("Ingrese dia de "+nombreCampo);
+        dia=sc.nextInt();
+        System.out.println("Ingrese mes de " + nombreCampo
+                + "\n1: Enero"
+                + "\n2: Febrero"
+                + "\n3: Marzo"
+                + "\n4: Abril"
+                + "\n5: Mayo"
+                + "\n6: Junio"
+                + "\n7: Julio"
+                + "\n8: Agosto"
+                + "\n9: Septiembre"
+                + "\n10: Octubre"
+                + "\n11: Noviembre"
+                + "\n12: Diciembre"
+        );
+        mes=sc.nextInt();
+        //Mes se le resta uno para nivelar mes de la clase calendar
+        mes--;
+        System.out.println("Ingrese año de "+nombreCampo);
+        anio=sc.nextInt();
+        return new GregorianCalendar(anio, mes, dia).getTime();
     }
 }
