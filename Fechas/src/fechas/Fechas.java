@@ -72,16 +72,16 @@ public class Fechas {
                 case 6:
                     int mayores=gestion.mayoresDeEdad();
                     if(mayores==0){
-                        System.out.println("No hay personas menores de edad");
+                        System.out.println("No hay personas mayores de edad");
                     }else{
-                       System.out.println("Los menores de edad son: "+mayores);
+                       System.out.println("Los mayores de edad son: "+mayores);
                     }
                     break;
                 case 7:
                     System.out.println("El programa mas escogido es: "+gestion.masEscogido());
                     break;
                 case 8:
-
+                    System.out.println("El salario mas alto es: "+gestion.salarioMasAlto());
                     break;
                 case 9:
                     int personasEnBarranquilla=gestion.personasEnBarranquilla();
@@ -170,6 +170,24 @@ public class Fechas {
                 
         }
         return materiaMayor;
+    }
+    
+    public BigDecimal salarioMasAlto(){
+        BigDecimal mayor = null;
+        BigDecimal salario;
+        for (Persona p : personas) {
+            if(p instanceof Empleado){
+                salario=((Empleado)p).getSalario() ;
+                if (mayor == null) {
+                    mayor =salario;
+                }
+                
+                if (salario.compareTo(mayor)>0) {
+                    mayor = salario;
+                }
+            }
+        }
+        return mayor;
     }
 
     /**
