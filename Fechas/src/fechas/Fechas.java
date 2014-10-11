@@ -264,7 +264,13 @@ public class Fechas {
         
     }
     public void consultarInformacion(){
-        agregarPersona();
-
+                //TODO: Editar el campo
+        //TODO: Ciclo para saber si va a cambiar mas campos
+        
+        System.out.println("mostrar informacion");
+        int index=sc.nextInt();
+        Persona p=personas.get(index);
+        System.out.println("Eligio: "+p);
+        //TODO: agregar condicional
     }
 }
