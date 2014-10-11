@@ -32,7 +32,7 @@ public class Fechas {
             System.out.println("\n1.Informacion");
             System.out.println("\n2.Modificar Informacion");
             System.out.println("\n3.Persona de Mayor Edad");
-            System.out.println("\n4.Numero de Personas de Mayor Edad");
+            System.out.println("\n4.Numero de Personas Mayores de Edad");
             System.out.println("\n5.Estudiantes de Menor Edad ");
             System.out.println("\n6.Programa mas Escojido");
             System.out.println("\n7.Salario mas Alto");
@@ -50,7 +50,7 @@ public class Fechas {
 
                     break;
                 case 3:
-
+                    System.out.println("La persona de mayor edad es: "+gestion.elMayor());
                     break;
                 case 4:
 
@@ -65,7 +65,12 @@ public class Fechas {
 
                     break;
                 case 8:
-
+                    int personasEnBarranquilla=gestion.personasEnBarranquilla();
+                    if(personasEnBarranquilla==0){
+                        System.out.println("No hay personas en Barranquilla");
+                    }else{
+                       System.out.println("Los residentes en Barranquilla son: "+personasEnBarranquilla);
+                    }
                     break;
                 case 9:
 
@@ -80,6 +85,10 @@ public class Fechas {
         }//fin de while
     }
 
+    /**
+     * Obtiene la persona que es mayor entre todos
+     * @return 
+     */
     public Persona elMayor() {
         Persona mayor = null;
         for (Persona p : personas) {
@@ -92,13 +101,14 @@ public class Fechas {
         return mayor;
     }
 
-    public boolean algunoEnBarranquilla() {
+    public int personasEnBarranquilla() {
+        int residentes=0;
         for (Persona p : personas) {
             if (p.getCiudad().equals("Barranquilla")) {
-                return true;
+                residentes++;
             }
         }
-        return false;
+        return residentes;
     }
 
     /**
