@@ -210,8 +210,8 @@ public class Fechas {
         return new GregorianCalendar(anio, mes, dia).getTime();
         
     }
-        public void consultarInformacion(){
-            agregarPersona();
+    public void consultarInformacion(){
+        agregarPersona();
 
-        }
+    }
 }
