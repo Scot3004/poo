@@ -5,11 +5,14 @@
  */
 package fechas;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author scot3004
  */
 public class Fechas {
+    ArrayList<Persona> personas=new ArrayList<>();
 
     /**
      * @param args the command line arguments
@@ -18,4 +21,14 @@ public class Fechas {
         
     }
     
+    public Persona elMayor(){
+        Persona mayor=null;
+        for(Persona p:personas){
+            if(mayor==null)
+                mayor=p;
+            else if(p.esMayor(mayor))
+                mayor=p;
+        }
+        return mayor;
+    }    
 }
