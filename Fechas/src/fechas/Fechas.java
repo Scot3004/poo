@@ -9,6 +9,7 @@ import static java.lang.System.out;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.Scanner;
 
 /**
@@ -35,10 +36,11 @@ public class Fechas {
             System.out.println("2.Modificar Informacion");
             System.out.println("3.Persona de Mayor Edad");
             System.out.println("4.Consultar Informacion");
-            System.out.println("5.Estudiantes de Menor Edad ");
-            System.out.println("6.Programa mas Escojido");
-            System.out.println("7.Salario mas Alto");
-            System.out.println("8.Personas que viven en Barranquilla");
+            System.out.println("5.Personas menores de edad");
+            System.out.println("6.Personas mayores de edad ");
+            System.out.println("7.Programa mas Escojido");
+            System.out.println("8.Salario mas Alto");
+            System.out.println("9.Personas que viven en Barranquilla");
             System.out.println("0.Salir");
             System.out.println("ingrese su opcion\t");
             opc = in.nextInt();
@@ -54,6 +56,9 @@ public class Fechas {
                     System.out.println("La persona de mayor edad es: "+gestion.elMayor());
                     break;
                 case 4:
+                    gestion.consultarInformacion();
+                    break;
+                case 5:
                     int menores=gestion.menoresDeEdad();
                     if(menores==0){
                         System.out.println("No hay personas menores de edad");
@@ -62,7 +67,7 @@ public class Fechas {
                     }
                     
                     break;
-                case 5:
+                case 6:
                     int mayores=gestion.mayoresDeEdad();
                     if(mayores==0){
                         System.out.println("No hay personas menores de edad");
@@ -70,13 +75,13 @@ public class Fechas {
                        System.out.println("Los menores de edad son: "+mayores);
                     }
                     break;
-                case 6:
-
-                    break;
                 case 7:
 
                     break;
                 case 8:
+
+                    break;
+                case 9:
                     int personasEnBarranquilla=gestion.personasEnBarranquilla();
                     if(personasEnBarranquilla==0){
                         System.out.println("No hay personas en Barranquilla");
@@ -136,6 +141,22 @@ public class Fechas {
         for (Persona p : personas) {
             if (p.isAdulto()) {
                 mayores++;
+            }
+        }
+        return mayores;
+    }
+    
+    public int masEscogida() {
+        HashMap<String, Integer> elegidas = new HashMap<>();
+        int mayores=0;
+        for (Persona p : personas) {
+            if (p instanceof Estudiante) {
+                Integer numero=elegidas.get(((Estudiante)p).getMateria());
+                if(numero==null){
+                    numero=0;
+                }
+                numero++;
+                elegidas.put(((Estudiante)p).getMateria(), numero);
             }
         }
         return mayores;
