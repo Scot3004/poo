@@ -121,6 +121,7 @@ public class Fechas {
         p.setCiudad(obtenerCampo("Ciduad:"));
         p.setCodigoPostal(obtenerCampo("Codigo Postal:"));
         p.setDireccion(obtenerCampo("Direccion:"));
+        p.setNacimiento(obtenerFecha("nacimiento"));
         //TODO: nacimiento de persona        
         personas.add(p);
     }
