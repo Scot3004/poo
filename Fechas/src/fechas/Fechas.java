@@ -6,6 +6,7 @@
 package fechas;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
 
@@ -133,5 +134,32 @@ public class Fechas {
     public String obtenerCampo(String mensaje) {
         System.out.println("\n" + mensaje);
         return sc.next();
+    }
+    
+    public Date obtenerFecha(String nombreCampo){
+        int dia, mes, anio;
+        System.out.println("\nIngresando "+nombreCampo);
+        System.out.println("Ingrese dia de "+nombreCampo);
+        dia=sc.nextInt();
+        System.out.println("Ingrese mes de " + nombreCampo
+                + "\n1: Enero"
+                + "\n2: Febrero"
+                + "\n3: Marzo"
+                + "\n4: Abril"
+                + "\n5: Mayo"
+                + "\n6: Junio"
+                + "\n7: Julio"
+                + "\n8: Agosto"
+                + "\n9: Septiembre"
+                + "\n10: Octubre"
+                + "\n11: Noviembre"
+                + "\n12: Diciembre"
+        );
+        mes=sc.nextInt();
+        //Mes se le resta uno para nivelar mes de la clase calendar
+        mes--;
+        System.out.println("Ingrese año de "+nombreCampo);
+        anio=sc.nextInt();
+        return new GregorianCalendar(anio, mes, dia).getTime();
     }
 }
