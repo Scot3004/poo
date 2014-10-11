@@ -5,6 +5,7 @@
  */
 package fechas;
 
+import static java.lang.System.out;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
@@ -25,11 +26,11 @@ public class Fechas {
         Fechas gestion = new Fechas();
         Scanner in = new Scanner(System.in);
 
-        int opc = 0;
-        while (opc != 9) {
+        int opc;
+        do {
             System.out.println("\n");
             System.out.println("\n	  MENU PRINCIPAL");
-            System.out.println("\n1.Informacion");
+            System.out.println("\n1.Agregar Persona");
             System.out.println("\n2.Modificar Informacion");
             System.out.println("\n3.Persona de Mayor Edad");
             System.out.println("\n4.Numero de Personas de Mayor Edad");
@@ -37,17 +38,16 @@ public class Fechas {
             System.out.println("\n6.Programa mas Escojido");
             System.out.println("\n7.Salario mas Alto");
             System.out.println("\n8.Personas que viven en Barranquilla");
-            System.out.println("\n9.Salir");
+            System.out.println("\n0.Salir");
             System.out.println("\n");
             System.out.println("\ningrese su opcion\t");
             opc = in.nextInt();
-
             switch (opc) {
                 case 1:
                     gestion.agregarPersona();
                     break;
                 case 2:
-
+                    gestion.editarInformacion();
                     break;
                 case 3:
 
@@ -67,17 +67,15 @@ public class Fechas {
                 case 8:
 
                     break;
-                case 9:
-
+                case 0:
                     System.exit(0);
-
                     break;
                 default:
                     System.out.println("Opcion incorrecta");
                     break;
 
             }// fin de switch
-        }//fin de while
+        }while (opc != 0); //fin de while
     }
 
     public Persona elMayor() {
@@ -112,6 +110,7 @@ public class Fechas {
         p.setDireccion(obtenerCampo("Direccion:"));
         //TODO: nacimiento de persona        
         personas.add(p);
+        System.out.println("La persona tiene id: "+(personas.size()-1));
     }
 
     /**
@@ -123,5 +122,48 @@ public class Fechas {
     public String obtenerCampo(String mensaje) {
         System.out.println("\n" + mensaje);
         return sc.next();
+    }
+    
+  
+    public void editarInformacion(){
+        //TODO; Pedir que persona modificara
+        //TODO; Pedir que campo Se editara
+        //TODO: Editar el campo
+        //TODO: Ciclo para saber si va a cambiar mas campos
+        
+        System.out.println("Que persona modificara  (id)");
+        int index=sc.nextInt();
+        Persona p=personas.get(index);
+        //TODO: agregar condicional
+        int opc;
+        do {
+            System.out.println("\n");
+            System.out.println("\nEDICION DE PERSONA");
+            System.out.println("\n1.Editar Nombre");
+            System.out.println("\n2.Editar Ciudad");
+            System.out.println("\n3.Editar Codigo Postal");
+            System.out.println("\n4.Editar Direccion");
+            System.out.println("\n0.Salir");
+            System.out.println("\n");
+            System.out.println("\ningrese su opcion\t");
+            opc = sc.nextInt();
+            switch (opc) {
+                case 1:
+                    p.setNombre(obtenerCampo("Nombre: "));
+                    break;
+                case 2:
+                    p.setCiudad(obtenerCampo("Ciudad: "));
+                    break;
+                case 3:
+                    p.setCodigoPostal(obtenerCampo("Codigo Postal: "));
+                    break;
+                case 4:
+                    p.setDireccion(obtenerCampo("Direccion: "));
+                    break;
+                default:
+                    System.out.println("Opcion incorrecta");
+                    break;
+            }// fin de switch
+        }while (opc != 0); //fin de while
     }
 }

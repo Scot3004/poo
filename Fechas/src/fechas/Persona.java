@@ -78,4 +78,12 @@ public class Persona {
                 ahora.get(GregorianCalendar.DAY_OF_MONTH));
         return this.getNacimiento().before(gc.getTime());
     }
+
+    @Override
+    public String toString() {
+        return "Persona{" + "\n.nombre=" + nombre + ", \n.nacimiento=" + nacimiento +
+                ", \n.direccion=" + direccion + ", \n.codigoPostal=" + codigoPostal + ", \n.ciudad=" + ciudad + '}';
+    }
+    
+    
 }
