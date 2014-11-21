@@ -29,13 +29,15 @@
                   <Component id="lblPregunta" max="32767" attributes="0"/>
                   <Component id="pnlRespuestas" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="txtGanado" pref="142" max="32767" attributes="0"/>
+                      <Component id="txtAsegurado" pref="135" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="prgTiempo" min="-2" pref="252" max="-2" attributes="0"/>
+                      <Component id="txtGanado" pref="134" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="prgTiempo" min="-2" pref="119" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="btnReset" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="145" max="32767" attributes="0"/>
                       <Component id="btnContinuar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnRetirarse" min="-2" max="-2" attributes="0"/>
@@ -50,7 +52,10 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="txtGanado" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="txtGanado" alignment="3" max="32767" attributes="0"/>
+                      <Component id="txtAsegurado" alignment="3" max="32767" attributes="0"/>
+                  </Group>
                   <Component id="prgTiempo" max="32767" attributes="0"/>
               </Group>
               <EmptySpace pref="11" max="32767" attributes="0"/>
@@ -128,6 +133,17 @@
           <ComponentRef name="pnlRespuestas"/>
         </Property>
         <Property name="text" type="java.lang.String" value="pregunta"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JFormattedTextField" name="txtAsegurado">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+        <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+          <Format subtype="0" type="4"/>
+        </Property>
+        <Property name="value" type="java.lang.Object" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="0" type="code"/>
+        </Property>
       </Properties>
     </Component>
   </SubComponents>

@@ -16,7 +16,8 @@ import logica.Pregunta;
 public class Millonario {
 
     public List<Pregunta> preguntas;
-    int pregunta=0;
+    int preguntaActual=0;
+    int[] seguros=new int[]{1,4,7};
 
     public List<Pregunta> getPreguntas() {
         if(preguntas==null){
@@ -41,10 +42,32 @@ public class Millonario {
     }
     
     public Pregunta getPregunta(){
-        if(pregunta<getPreguntas().size())
-            return getPreguntas().get(pregunta++);
+        if(preguntaActual<getPreguntas().size())
+            return getPreguntas().get(preguntaActual++);
         else return null;
        
+    }
+
+    public void resetCounter() {
+        preguntaActual=0;
+    }
+
+    public int getPreguntaActual() {
+        return preguntaActual;
+    }
+
+    public void setPreguntaActual(int preguntaActual) {
+        this.preguntaActual = preguntaActual;
+    }
+    
+    public int getAsegurado(){
+        int preguntaAsegurada=0;
+        for(int i: seguros){
+            if(i<=preguntaActual){
+                preguntaAsegurada=i;
+            }
+        }
+        return preguntaAsegurada;
     }
     
 }
