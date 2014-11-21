@@ -6,6 +6,8 @@
 package millonario;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 import logica.Pregunta;
 
@@ -18,6 +20,7 @@ public class Millonario {
     public List<Pregunta> preguntas;
     int preguntaActual=0;
     int[] seguros=new int[]{1,4,7};
+    private boolean ayuda_50=true;
 
     public List<Pregunta> getPreguntas() {
         if(preguntas==null){
@@ -69,5 +72,46 @@ public class Millonario {
         }
         return preguntaAsegurada;
     }
+    
+    public List<Integer> incorrectas(){
+        if(ayuda_50){
+            LinkedList<Integer>  lista = new LinkedList<>();
+            for(int i=0;i<4;i++){
+                lista.add(i);
+            }
+            Integer correcta=getPreguntas().get(getPreguntaActual()-1).getCorrecta();
+            System.out.println(correcta);
+            lista.remove(correcta);
+            System.out.println(lista);
+            Collections.shuffle(lista);
+            System.out.println("Eliminado "+lista.pop());
+            
+            System.out.println(lista);
+            ayuda_50=false;
+            return lista;
+        }else{
+            return null;
+        }
+        
+    }
+
+    public int[] getSeguros() {
+        return seguros;
+    }
+
+    public void setSeguros(int[] seguros) {
+        this.seguros = seguros;
+    }
+
+    public boolean isAyuda_50() {
+        return ayuda_50;
+    }
+
+    public void setAyuda_50(boolean ayuda_50) {
+        this.ayuda_50 = ayuda_50;
+    }
+
+    
+    
     
 }

@@ -37,7 +37,9 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="btnReset" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="145" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="btnAyuda50" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnContinuar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnRetirarse" min="-2" max="-2" attributes="0"/>
@@ -67,6 +69,7 @@
                   <Component id="btnContinuar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnRetirarse" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnReset" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnAyuda50" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -145,6 +148,14 @@
           <Connection code="0" type="code"/>
         </Property>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnAyuda50">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="50/50"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAyuda50ActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

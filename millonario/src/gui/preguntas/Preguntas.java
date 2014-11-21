@@ -51,6 +51,7 @@ public class Preguntas extends javax.swing.JFrame {
         btnReset = new javax.swing.JButton();
         lblPregunta = new javax.swing.JLabel();
         txtAsegurado = new javax.swing.JFormattedTextField();
+        btnAyuda50 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -91,6 +92,13 @@ public class Preguntas extends javax.swing.JFrame {
         txtAsegurado.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getCurrencyInstance())));
         txtAsegurado.setValue(0);
 
+        btnAyuda50.setText("50/50");
+        btnAyuda50.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAyuda50ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -108,7 +116,9 @@ public class Preguntas extends javax.swing.JFrame {
                         .addComponent(prgTiempo, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(btnReset)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 145, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAyuda50)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnContinuar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnRetirarse)))
@@ -131,7 +141,8 @@ public class Preguntas extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnContinuar)
                     .addComponent(btnRetirarse)
-                    .addComponent(btnReset))
+                    .addComponent(btnReset)
+                    .addComponent(btnAyuda50))
                 .addContainerGap())
         );
 
@@ -152,13 +163,23 @@ public class Preguntas extends javax.swing.JFrame {
         cargarPregunta();
         btnReset.setEnabled(false);
         continuar=true;
+        millonario.setAyuda_50(true);
+        btnAyuda50.setEnabled(true);
     }//GEN-LAST:event_btnResetActionPerformed
 
     private void btnRetirarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetirarseActionPerformed
         btnReset.setEnabled(true);
         btnRetirarse.setEnabled(false);
         btnContinuar.setEnabled(false);
+        JOptionPane.showMessageDialog(this, "Has ganado "+txtGanado.getValue());
     }//GEN-LAST:event_btnRetirarseActionPerformed
+
+    private void btnAyuda50ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAyuda50ActionPerformed
+        for(Integer i:millonario.incorrectas()){
+            pnlRespuestas.getComponents()[i].setBackground(Color.WHITE);
+        }
+        btnAyuda50.setEnabled(false);
+    }//GEN-LAST:event_btnAyuda50ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -209,7 +230,6 @@ public class Preguntas extends javax.swing.JFrame {
             }else{
                 respuestaIncorrecta();
             }
-            System.out.println("Respuesta escogida: " + actual.getOpciones()[escogida]);
         }
     }
     
@@ -255,6 +275,7 @@ public class Preguntas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAyuda50;
     private javax.swing.JButton btnContinuar;
     private javax.swing.JButton btnReset;
     private javax.swing.JButton btnRetirarse;
