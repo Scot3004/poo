@@ -45,7 +45,7 @@ public class Preguntas extends javax.swing.JFrame {
 
         pnlRespuestas = new javax.swing.JPanel();
         prgTiempo = new javax.swing.JProgressBar();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        txtGanado = new javax.swing.JFormattedTextField();
         btnContinuar = new javax.swing.JButton();
         btnRetirarse = new javax.swing.JButton();
         btnReset = new javax.swing.JButton();
@@ -56,7 +56,9 @@ public class Preguntas extends javax.swing.JFrame {
         pnlRespuestas.setBorder(javax.swing.BorderFactory.createTitledBorder("Presione su respuesta"));
         pnlRespuestas.setLayout(new java.awt.GridLayout(0, 1));
 
-        jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getCurrencyInstance())));
+        txtGanado.setEditable(false);
+        txtGanado.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getCurrencyInstance())));
+        txtGanado.setValue(0);
 
         btnContinuar.setText("Continuar");
         btnContinuar.setEnabled(false);
@@ -94,7 +96,7 @@ public class Preguntas extends javax.swing.JFrame {
                     .addComponent(lblPregunta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnlRespuestas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(jFormattedTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
+                        .addComponent(txtGanado, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(prgTiempo, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
@@ -110,7 +112,7 @@ public class Preguntas extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jFormattedTextField1)
+                    .addComponent(txtGanado)
                     .addComponent(prgTiempo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addComponent(lblPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -128,9 +130,7 @@ public class Preguntas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
-        for(Component c:pnlRespuestas.getComponents()){
-            c.setBackground(null);
-        }
+        pnlRespuestas.removeAll();
         continuar=true;
         cargarPregunta();
         btnContinuar.setEnabled(false);
@@ -138,13 +138,11 @@ public class Preguntas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnContinuarActionPerformed
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
-        for(Component c:pnlRespuestas.getComponents()){
-            c.setBackground(null);
-        }
-        //pnlRespuestas.removeAll();
+        pnlRespuestas.removeAll();
         cargarPregunta();
         btnReset.setEnabled(false);
         continuar=true;
+        //millonario.resetCounter();
     }//GEN-LAST:event_btnResetActionPerformed
 
     private void btnRetirarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetirarseActionPerformed
@@ -210,6 +208,7 @@ public class Preguntas extends javax.swing.JFrame {
     private void respuestaCorrecta(){
         btnContinuar.setEnabled(true);
         btnRetirarse.setEnabled(true);
+        //txtGanado.setValue(((Integer)txtGanado.getValue())+50000);
         //JOptionPane.showMessageDialog(this, "ok");
     }
     
@@ -248,9 +247,9 @@ public class Preguntas extends javax.swing.JFrame {
     private javax.swing.JButton btnContinuar;
     private javax.swing.JButton btnReset;
     private javax.swing.JButton btnRetirarse;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel lblPregunta;
     private javax.swing.JPanel pnlRespuestas;
     private javax.swing.JProgressBar prgTiempo;
+    private javax.swing.JFormattedTextField txtGanado;
     // End of variables declaration//GEN-END:variables
 }
