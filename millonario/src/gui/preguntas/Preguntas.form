@@ -68,8 +68,8 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnContinuar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnRetirarse" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnReset" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnAyuda50" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnReset" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -92,6 +92,9 @@
       </Layout>
     </Container>
     <Component class="javax.swing.JProgressBar" name="prgTiempo">
+      <Properties>
+        <Property name="stringPainted" type="boolean" value="true"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="txtGanado">
       <Properties>

@@ -8,10 +8,15 @@ package gui.preguntas;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.JProgressBar;
+import javax.swing.SwingWorker;
 import logica.Pregunta;
 import millonario.Millonario;
 
@@ -19,19 +24,21 @@ import millonario.Millonario;
  *
  * @author scot3004
  */
-public class Preguntas extends javax.swing.JFrame {
+public class Preguntas extends javax.swing.JFrame implements ActionListener,
+    PropertyChangeListener {
 
     List<Preguntas> preguntas = new ArrayList<>();
     millonario.Millonario millonario = new Millonario();
     Pregunta actual;
-    boolean continuar=true;
+    boolean continuar = true;
+    boolean timer;
 
     /**
      * Creates new form Preguntas
      */
     public Preguntas() {
         initComponents();
-        
+
     }
 
     /**
@@ -57,6 +64,8 @@ public class Preguntas extends javax.swing.JFrame {
 
         pnlRespuestas.setBorder(javax.swing.BorderFactory.createTitledBorder("Presione su respuesta"));
         pnlRespuestas.setLayout(new java.awt.GridLayout(0, 1));
+
+        prgTiempo.setStringPainted(true);
 
         txtGanado.setEditable(false);
         txtGanado.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getCurrencyInstance())));
@@ -141,8 +150,8 @@ public class Preguntas extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnContinuar)
                     .addComponent(btnRetirarse)
-                    .addComponent(btnReset)
-                    .addComponent(btnAyuda50))
+                    .addComponent(btnAyuda50)
+                    .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -151,32 +160,36 @@ public class Preguntas extends javax.swing.JFrame {
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
         pnlRespuestas.removeAll();
-        continuar=true;
+        continuar = true;
         cargarPregunta();
         btnContinuar.setEnabled(false);
         btnRetirarse.setEnabled(false);
+        timer=true;
+        iniciarTimer(evt);
     }//GEN-LAST:event_btnContinuarActionPerformed
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
         millonario.resetCounter();
-        pnlRespuestas.removeAll();
         cargarPregunta();
         btnReset.setEnabled(false);
-        continuar=true;
+        continuar = true;
         millonario.setAyuda_50(true);
         btnAyuda50.setEnabled(true);
+        timer=true;
+        iniciarTimer(evt);
     }//GEN-LAST:event_btnResetActionPerformed
 
     private void btnRetirarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetirarseActionPerformed
         btnReset.setEnabled(true);
         btnRetirarse.setEnabled(false);
         btnContinuar.setEnabled(false);
-        JOptionPane.showMessageDialog(this, "Has ganado "+txtGanado.getValue());
+        JOptionPane.showMessageDialog(this, "Has ganado " + txtGanado.getValue());
     }//GEN-LAST:event_btnRetirarseActionPerformed
 
     private void btnAyuda50ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAyuda50ActionPerformed
-        for(Integer i:millonario.incorrectas()){
+        for (Integer i : millonario.incorrectas()) {
             pnlRespuestas.getComponents()[i].setBackground(Color.WHITE);
+            pnlRespuestas.getComponents()[i].setEnabled(false);
         }
         btnAyuda50.setEnabled(false);
     }//GEN-LAST:event_btnAyuda50ActionPerformed
@@ -213,8 +226,10 @@ public class Preguntas extends javax.swing.JFrame {
     }
 
     private void responder(ActionEvent evt) {
-        if(continuar){
-            continuar=false;
+        task.cancel(true);
+        timer=false;
+        if (continuar) {
+            continuar = false;
             JButton jb = ((JButton) evt.getSource());
             jb.setBackground(Color.orange);
             int index = 0, escogida = -1;
@@ -225,40 +240,46 @@ public class Preguntas extends javax.swing.JFrame {
                 index++;
             }
             resaltarCorrecta();
-            if(escogida==actual.getCorrecta()){
+            if (escogida == actual.getCorrecta()) {
                 respuestaCorrecta();
-            }else{
+            } else {
                 respuestaIncorrecta();
             }
+
         }
     }
-    
-    
-    private void respuestaCorrecta(){
+
+    private void respuestaCorrecta() {
         btnContinuar.setEnabled(true);
         btnRetirarse.setEnabled(true);
-        txtGanado.setValue((millonario.getPreguntaActual()*50000));
-        txtAsegurado.setValue((millonario.getAsegurado()*50000));
+        txtGanado.setValue((millonario.getPreguntaActual() * 50000));
+        txtAsegurado.setValue((millonario.getAsegurado() * 50000));
         //JOptionPane.showMessageDialog(this, "ok");
     }
-    
-    private void respuestaIncorrecta(){
+
+    private void respuestaIncorrecta() {
         btnReset.setEnabled(true);
         btnContinuar.setEnabled(false);
-        JOptionPane.showMessageDialog(this, "Has ganado "+txtAsegurado.getValue());
+        JOptionPane.showMessageDialog(this, "Has ganado " + txtAsegurado.getValue());
+        btnAyuda50.setEnabled(false);
+        for(Component c:pnlRespuestas.getComponents())
+            c.setEnabled(false);
         //JOptionPane.showMessageDialog(this, "perdiste");
     }
-    
+
     private void resaltarCorrecta() {
         Component[] c = pnlRespuestas.getComponents();
         c[actual.getCorrecta()].setBackground(Color.GREEN);
     }
 
-    public void cargarPregunta(){
+    public void cargarPregunta() {
+        //pnlRespuestas = new javax.swing.JPanel();
+        //pnlRespuestas.setBorder(javax.swing.BorderFactory.createTitledBorder("Presione su respuesta"));
+        //pnlRespuestas.setLayout(new java.awt.GridLayout(0, 1));     
         actual = millonario.getPregunta();
         cargarPregunta(actual);
     }
-    
+
     public void cargarPregunta(Pregunta p) {
         lblPregunta.setText(p.getPregunta());
         String[] opciones = p.getOpciones();
@@ -273,6 +294,63 @@ public class Preguntas extends javax.swing.JFrame {
             pnlRespuestas.add(btnOpcion);
         }
     }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    class Task extends SwingWorker<Void, Void> {
+
+        @Override
+        public Void doInBackground() {
+
+            int progress = 0;
+            // Initialize progress property.
+            setProgress(0);
+            while (progress < 100&&continuar) {
+                // Sleep for up to one second.
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException ignore) {
+                }
+                // Make random progress.
+                progress += 10;
+                setProgress(Math.min(progress, 100));
+            }
+            return null;
+        }
+
+        /*
+         * Executed in event dispatching thread
+         */
+        @Override
+        public void done() {
+            if(!timer){
+                JOptionPane.showMessageDialog(null, "Se acabo el tiempo");
+                respuestaIncorrecta();
+            }
+        }
+    }
+    
+    public void iniciarTimer(ActionEvent evt){
+        task = new Task();
+    task.addPropertyChangeListener(this);
+    task.execute();
+    }
+    
+      /**
+   * Invoked when task's progress property changes.
+     * @param evt
+   */
+    @Override
+  public void propertyChange(PropertyChangeEvent evt) {
+    if ("progress".equals(evt.getPropertyName())) {
+      int progress = (Integer) evt.getNewValue();
+      prgTiempo.setValue(progress);
+    }
+  }
+private Task task;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAyuda50;
