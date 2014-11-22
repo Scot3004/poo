@@ -59,8 +59,12 @@ public class Preguntas extends javax.swing.JFrame implements ActionListener,
         lblPregunta = new javax.swing.JLabel();
         txtAsegurado = new javax.swing.JFormattedTextField();
         btnAyuda50 = new javax.swing.JButton();
+        btnPista2 = new javax.swing.JButton();
+        btnPista1 = new javax.swing.JButton();
+        lblAyuda = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Millonario");
 
         pnlRespuestas.setBorder(javax.swing.BorderFactory.createTitledBorder("Presione su respuesta"));
         pnlRespuestas.setLayout(new java.awt.GridLayout(0, 1));
@@ -108,24 +112,45 @@ public class Preguntas extends javax.swing.JFrame implements ActionListener,
             }
         });
 
+        btnPista2.setText("Publico");
+        btnPista2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPista2ActionPerformed(evt);
+            }
+        });
+
+        btnPista1.setText("Llamada");
+        btnPista1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPista1ActionPerformed(evt);
+            }
+        });
+
+        lblAyuda.setText("Ayuda");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblPregunta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlRespuestas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(txtAsegurado, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblAyuda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblPregunta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnlRespuestas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtAsegurado)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtGanado, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
+                        .addComponent(txtGanado)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(prgTiempo, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(btnReset)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                        .addComponent(btnPista2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnPista1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnAyuda50)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnContinuar)
@@ -142,16 +167,20 @@ public class Preguntas extends javax.swing.JFrame implements ActionListener,
                         .addComponent(txtGanado)
                         .addComponent(txtAsegurado))
                     .addComponent(prgTiempo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pnlRespuestas, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addComponent(lblAyuda)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnContinuar)
                     .addComponent(btnRetirarse)
                     .addComponent(btnAyuda50)
-                    .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPista2)
+                    .addComponent(btnPista1))
                 .addContainerGap())
         );
 
@@ -161,16 +190,27 @@ public class Preguntas extends javax.swing.JFrame implements ActionListener,
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
         pnlRespuestas.removeAll();
         continuar = true;
-        cargarPregunta();
-        btnContinuar.setEnabled(false);
-        btnRetirarse.setEnabled(false);
-        timer=true;
-        iniciarTimer(evt);
+        lblAyuda.setText("");
+        if(cargarPregunta()){
+            btnContinuar.setEnabled(false);
+            btnRetirarse.setEnabled(false);
+            timer=true;
+            iniciarTimer(evt);
+        }
     }//GEN-LAST:event_btnContinuarActionPerformed
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
+        actual=null;
         millonario.resetCounter();
+        pnlRespuestas.removeAll();
+        txtAsegurado.setValue(0);
+        txtGanado.setValue(0);
+        lblAyuda.setText("");
+        btnPista1.setEnabled(true);
+        btnPista2.setEnabled(true);
         cargarPregunta();
+        for(Component c: pnlRespuestas.getComponents())
+            c.setEnabled(true);
         btnReset.setEnabled(false);
         continuar = true;
         millonario.setAyuda_50(true);
@@ -188,11 +228,20 @@ public class Preguntas extends javax.swing.JFrame implements ActionListener,
 
     private void btnAyuda50ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAyuda50ActionPerformed
         for (Integer i : millonario.incorrectas()) {
-            pnlRespuestas.getComponents()[i].setBackground(Color.WHITE);
             pnlRespuestas.getComponents()[i].setEnabled(false);
         }
         btnAyuda50.setEnabled(false);
     }//GEN-LAST:event_btnAyuda50ActionPerformed
+
+    private void btnPista1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPista1ActionPerformed
+        btnPista1.setEnabled(false);
+        lblAyuda.setText(actual.getPista1());
+    }//GEN-LAST:event_btnPista1ActionPerformed
+
+    private void btnPista2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPista2ActionPerformed
+        btnPista2.setEnabled(false);
+        lblAyuda.setText(actual.getPista2());
+    }//GEN-LAST:event_btnPista2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -226,8 +275,8 @@ public class Preguntas extends javax.swing.JFrame implements ActionListener,
     }
 
     private void responder(ActionEvent evt) {
-        task.cancel(true);
         timer=false;
+        task.cancel(true);
         if (continuar) {
             continuar = false;
             JButton jb = ((JButton) evt.getSource());
@@ -272,17 +321,24 @@ public class Preguntas extends javax.swing.JFrame implements ActionListener,
         c[actual.getCorrecta()].setBackground(Color.GREEN);
     }
 
-    public void cargarPregunta() {
+    public boolean cargarPregunta() {
         //pnlRespuestas = new javax.swing.JPanel();
         //pnlRespuestas.setBorder(javax.swing.BorderFactory.createTitledBorder("Presione su respuesta"));
         //pnlRespuestas.setLayout(new java.awt.GridLayout(0, 1));     
         actual = millonario.getPregunta();
-        cargarPregunta(actual);
-    }
-
-    public void cargarPregunta(Pregunta p) {
-        lblPregunta.setText(p.getPregunta());
-        String[] opciones = p.getOpciones();
+        if(actual==null){
+            JOptionPane.showMessageDialog(this, "No hay mas preguntas, ganaste: "+txtGanado.getText());
+            timer=false;
+            task.cancel(true);
+            btnReset.setEnabled(true);
+            btnContinuar.setEnabled(false);
+            btnRetirarse.setEnabled(false);
+            btnAyuda50.setEnabled(false);
+            return false;
+            
+        }
+        lblPregunta.setText(actual.getPregunta());
+        String[] opciones = actual.getOpciones();
         for (String opcion : opciones) {
             JButton btnOpcion = new JButton(opcion);
             btnOpcion.addActionListener(new java.awt.event.ActionListener() {
@@ -293,6 +349,7 @@ public class Preguntas extends javax.swing.JFrame implements ActionListener,
             });
             pnlRespuestas.add(btnOpcion);
         }
+        return true;
     }
 
     @Override
@@ -311,11 +368,11 @@ public class Preguntas extends javax.swing.JFrame implements ActionListener,
             while (progress < 100&&continuar) {
                 // Sleep for up to one second.
                 try {
-                    Thread.sleep(500);
+                    Thread.sleep(100);
                 } catch (InterruptedException ignore) {
                 }
                 // Make random progress.
-                progress += 10;
+                progress += 1;
                 setProgress(Math.min(progress, 100));
             }
             return null;
@@ -326,7 +383,7 @@ public class Preguntas extends javax.swing.JFrame implements ActionListener,
          */
         @Override
         public void done() {
-            if(!timer){
+            if(timer){
                 JOptionPane.showMessageDialog(null, "Se acabo el tiempo");
                 respuestaIncorrecta();
             }
@@ -335,8 +392,8 @@ public class Preguntas extends javax.swing.JFrame implements ActionListener,
     
     public void iniciarTimer(ActionEvent evt){
         task = new Task();
-    task.addPropertyChangeListener(this);
-    task.execute();
+        task.addPropertyChangeListener(this);
+        task.execute();
     }
     
       /**
@@ -355,8 +412,11 @@ private Task task;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAyuda50;
     private javax.swing.JButton btnContinuar;
+    private javax.swing.JButton btnPista1;
+    private javax.swing.JButton btnPista2;
     private javax.swing.JButton btnReset;
     private javax.swing.JButton btnRetirarse;
+    private javax.swing.JLabel lblAyuda;
     private javax.swing.JLabel lblPregunta;
     private javax.swing.JPanel pnlRespuestas;
     private javax.swing.JProgressBar prgTiempo;
